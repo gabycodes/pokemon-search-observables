@@ -10,7 +10,6 @@ import PokemonDetails from './PokemonDetails'
 const ResultsList = props => {
 	let match = useRouteMatch();
 	
-	console.log({match})
 	return (
 		<>
 			<ul>
