@@ -1,5 +1,6 @@
-import React, {Component} from 'react'
+import React, { Component, useState } from 'react'
 import SearchForm from './SearchForm'
+import ResultsList from './ResultsList'
 
 class PokeonSearch extends Component {
 	// create form with throttle
@@ -18,23 +19,23 @@ class PokeonSearch extends Component {
 	}
 	
 	searchPokemon = query => {
-		const fetchResults = fetch('https://pokeapi.co/api/v2/pokemon/?offset=20&limit=1000')
+		fetch('https://pokeapi.co/api/v2/pokemon/?offset=20&limit=1000')
 			.then(res => res.json())
 			.then(res => res.results.filter(pokemon => pokemon.name.includes(query)))
+			.then(res => res.filter(pokemon => !pokemon.name.includes('alola')))
 			.then(res => this.setState({ searchResults: res }))
-		
 	}
 
 	render() {
-		console.log(this.state.searchResults)
-
 		return(
-			<SearchForm 
-				updateCurrentQuery={this.updateCurrentQuery} 
-			/>
+			<>
+				<SearchForm 
+					updateCurrentQuery={this.updateCurrentQuery} 
+				/>
+				<ResultsList results={this.state.searchResults} />
+			</>
 		)
 	}
-
 }
 
 export default PokeonSearch
