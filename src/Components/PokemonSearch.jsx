@@ -3,12 +3,13 @@ import { connect } from 'react-redux'
 import SearchForm from './SearchForm'
 import ResultsList from './ResultsList'
 import { storeAllPokemon, updateCurrentQuery } from '../Reducers/pokemonReducer'
+import styles from '../CSS-Modules/PokemonSearch.module.css'
 
 const PokemonSearch = props => {
 	const [storedPokemon, setStoredPokemon] = useState([])
 	const [searchResults, setSearchResults] = useState([])
 	useEffect(() => {
-		fetch('https://pokeapi.co/api/v2/pokemon/?offset=20&limit=1000')
+		fetch('https://pokeapi.co/api/v2/pokemon/?limit=1000')
 			.then(res => res.json())
 			.then(res => res.results.filter(pokemon => !pokemon.name.includes('alola') && !pokemon.name.includes('-mega')))
 			.then(res => {
@@ -27,14 +28,13 @@ const PokemonSearch = props => {
 		setSearchResults(results)
 	}
 
-	console.log(props)
 	return (
-		<>
+		<div className={styles.body}>
 			<SearchForm 
 				updateCurrentQuery={updateCurrentQuery} 
 			/>
 			<ResultsList results={searchResults} />
-		</>
+		</div>
 	)
 }
 

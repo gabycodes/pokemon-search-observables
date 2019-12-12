@@ -6,13 +6,14 @@ import {
   useRouteMatch,
 } from "react-router-dom";
 import PokemonDetails from './PokemonDetails'
+import styles from '../CSS-Modules/ResultsList.module.css'
 
 const ResultsList = props => {
 	let match = useRouteMatch();
 	
 	return (
 		<>
-			<ul>
+			<ul className={styles.resultsList}>
 				{props.results.map(({name}) => (
 					<li key={name}>
 						<Link to={`${match.url}/${name}`}>{name}</Link>
