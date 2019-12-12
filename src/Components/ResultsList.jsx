@@ -10,18 +10,18 @@ import styles from '../CSS-Modules/ResultsList.module.css'
 
 const ResultsList = props => {
 	let match = useRouteMatch();
-	
+	console.log(match)
 	return (
 		<>
 			<ul className={styles.resultsList}>
 				{props.results.map(({name}) => (
 					<li key={name}>
-						<Link to={`${match.url}/${name}`}>{name}</Link>
+						<Link to={`${match.url}pokemon/${name}`}>{name}</Link>
 					</li>
 				) )}
 			</ul>
 			<Switch>
-				<Route path={`${match.path}/:pokemon`}>
+				<Route path={`${match.path}pokemon/:pokemon`}>
           <PokemonDetails />
         </Route>
 			</Switch>

@@ -6,11 +6,13 @@ const SearchForm = props => {
 		props.updateCurrentQuery(event.target.value)
 	}
 
+	const placeholder = !props.isFormDirty ? "...Well? Look for something already!" : "Have another look!"
+	
 	return (
 		<div className={styles.searchForm}>
-		<h2>Gotta Browse 'Em All</h2>
+		<h2>Gotta Browse 'Em All!</h2>
 			<form action="">
-				<input type="text" onChange={onChange} />
+				<input type="text" placeholder={placeholder} onChange={onChange} />
 			</form>
 		</div>
 	)

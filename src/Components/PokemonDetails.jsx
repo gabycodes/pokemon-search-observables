@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from "react-router-dom";
+import Button from './Button'
+import styles from '../CSS-Modules/PokemonDetails.module.css'
 
 const PokemonDetails = props => {
 	const [pokemonDetails, setPokemonDetails] = useState()
@@ -23,20 +25,23 @@ const PokemonDetails = props => {
 	}
 
 	return (
-		<div>
+		<div className={styles.detailsHolder}>
+			<Button url={'/'}/>
 			<h2>{pokemon}</h2>
-			<p>Order: {pokemonDetails && pokemonDetails.order}</p>
-			<p>Height: {pokemonDetails && pokemonDetails.height}</p>
-			<p>Weight: {pokemonDetails && pokemonDetails.weight}</p>
-			<p>Types: {allTypes}</p>
-			<p>Base Stats</p>
-			<ul>
-				{pokemonDetails && pokemonDetails.stats.map(({stat, base_stat}) => (
-					<li key={stat.name}>{stat.name}: {base_stat}</li>
-				))}
-			</ul>
-			<div className="imageHolder">
+			<div className={styles.imageHolder}>
 				<img src={pokemonDetails && pokemonDetails.sprites.front_default} alt=""/>
+			</div>
+			<div className={styles.contentHolder}>
+				<p><span>Order:</span> {pokemonDetails && pokemonDetails.order}</p>
+				<p><span>Height:</span> {pokemonDetails && pokemonDetails.height}</p>
+				<p><span>Weight:</span> {pokemonDetails && pokemonDetails.weight}</p>
+				<p><span>Types:</span> {allTypes}</p>
+				<p><span>Base Stats:</span></p>
+				<ul>
+					{pokemonDetails && pokemonDetails.stats.map(({stat, base_stat}) => (
+						<li key={stat.name}>{stat.name}: {base_stat}</li>
+					))}
+				</ul>
 			</div>
 		</div>
 	)

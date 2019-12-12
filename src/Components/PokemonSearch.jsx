@@ -8,6 +8,8 @@ import styles from '../CSS-Modules/PokemonSearch.module.css'
 const PokemonSearch = props => {
 	const [storedPokemon, setStoredPokemon] = useState([])
 	const [searchResults, setSearchResults] = useState([])
+	const [isDirty, setIsDirty] = useState(false)
+
 	useEffect(() => {
 		fetch('https://pokeapi.co/api/v2/pokemon/?limit=1000')
 			.then(res => res.json())
@@ -20,6 +22,7 @@ const PokemonSearch = props => {
 
 	const updateCurrentQuery = newQuery => {
 		props.updateCurrentQuery(newQuery)
+		setIsDirty(true)
 		searchPokemon(newQuery)
 	}
 	
@@ -29,9 +32,10 @@ const PokemonSearch = props => {
 	}
 
 	return (
-		<div className={styles.body}>
+		<div className={styles.everythingHolder}>
 			<SearchForm 
-				updateCurrentQuery={updateCurrentQuery} 
+				updateCurrentQuery={updateCurrentQuery}
+				isFormDirty={isDirty}
 			/>
 			<ResultsList results={searchResults} />
 		</div>

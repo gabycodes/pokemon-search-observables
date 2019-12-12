@@ -13,7 +13,7 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          <Route exact path='/pokemon'>
+          <Route exact path='/'>
             <PokemonSearch />
           </Route>
           <Route path='/pokemon/:pokemon'>

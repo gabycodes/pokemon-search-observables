@@ -1,0 +1,57 @@
+.detailsHolder {
+  background-color: white;
+  border-radius: 4px;
+  width: 400px;
+  margin: 50px auto;
+  width: 80%;
+  font-size: 2rem;
+  text-align: left;
+  padding: 50px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.detailsHolder h2 {
+  text-align: center;
+  letter-spacing: 2px;
+  width: 100%;
+}
+
+.imageHolder {
+  margin: 0 auto;
+}
+
+.imageHolder,
+.contentHolder {
+  display: inline-block;
+  width: 50%;
+}
+
+.detailsHolder p {
+  margin: 12px 0;
+}
+
+.detailsHolder p:last-of-type {
+  margin: 35px 0 10px;
+}
+
+.detailsHolder ul {
+  padding-left: 10px;
+  margin: 0;
+}
+
+.detailsHolder li {
+  margin: 4px;
+}
+
+.detailsHolder span {
+  font-weight: bold;
+}
+
+.detailsHolder a {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+}
