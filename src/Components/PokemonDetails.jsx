@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from "react-router-dom";
+import { of } from 'rxjs'
+import { fromFetch } from 'rxjs/fetch'
+import { switchMap, catchError } from 'rxjs/operators'
 import Button from './Button'
 import styles from '../CSS-Modules/PokemonDetails.module.css'
 
@@ -9,10 +12,28 @@ const PokemonDetails = props => {
 	let { pokemon } = useParams();
 
 	useEffect(() => {
-		fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
-			.then(res => res.json())
-			.then(res => setPokemonDetails(res))
-			.then(res => setIsLoading(false))
+		const currentPokemonDetails = fromFetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`).pipe(
+			switchMap(response => {
+				if (response.ok) {
+					return response.json()
+				} else {
+					return of({ error: true, message: `Error: ${response.status}` })
+				}
+			}),
+			catchError(error => {
+				console.error(error)
+				return of({ error: true, message: error.message })
+			})
+		)
+
+		currentPokemonDetails.subscribe({
+			next: result => {
+				setPokemonDetails(result)
+				setIsLoading(false)
+			},
+			error: () => console.log('error'),
+			complete: () => console.log('Done')
+		})
 	}, [pokemon])
 
 	const allTypes = pokemonDetails && pokemonDetails.types.reduce((acc, type) => {

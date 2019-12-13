@@ -10,7 +10,6 @@ import styles from '../CSS-Modules/ResultsList.module.css'
 
 const ResultsList = props => {
 	let match = useRouteMatch();
-	console.log(match)
 	return (
 		<>
 			<ul className={styles.resultsList}>
